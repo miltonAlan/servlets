@@ -1,3 +1,9 @@
 !BDD/
 !src/
 !pom.xml
+target/
+*.txt
+.classpath
+.project
+.settings/
+
