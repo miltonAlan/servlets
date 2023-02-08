@@ -6,42 +6,35 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.uce.servlet.dao.EmployeeDao;
-import com.uce.servlet.modelo.Employee;
+import com.uce.servlet.dao.ParqueaderoDAO;
+import com.uce.servlet.modelo.Parqueadero;
 
 @WebServlet("/EmployeeServletUsed")
 public class EmployeeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private EmployeeDao employeeDao;
+	private ParqueaderoDAO parqueaderoDAO;
 
 	public void init() {
-		employeeDao = new EmployeeDao();
+		parqueaderoDAO = new ParqueaderoDAO();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String firstName = request.getParameter("firstName");
-		String lastName = request.getParameter("lastName");
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		String address = request.getParameter("address");
-		String contact = request.getParameter("contact");
-
-		Employee employee = new Employee();
-		employee.setFirstName(firstName);
-		employee.setLastName(lastName);
-		employee.setUsername(username);
-		employee.setPassword(password);
-		employee.setContact(contact);
-		employee.setAddress(address);
+		Parqueadero parqueadero = new Parqueadero();
+		parqueadero.setNombre_usuario(request.getParameter("nombre_usuario"));
+		parqueadero.setTipo_vehiculo(request.getParameter("tipo_vehiculo"));
+		parqueadero.setTiempo(request.getParameter("tiempo"));
+		parqueadero.setPlaca(request.getParameter("placa"));
+		parqueadero.setColor(request.getParameter("color"));
+		parqueadero.setMarca(request.getParameter("marca"));
+		parqueadero.setDescripcion_adicional(request.getParameter("descripcion_adicional"));
 
 		try {
-			employeeDao.registerEmployee(employee);
+			parqueaderoDAO.registerEmployee(parqueadero);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		response.sendRedirect("employeedetails.jsp");
+		response.sendRedirect("listaParqueaderos.jsp");
 	}
 }

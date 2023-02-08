@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>LISTA DE PARQUEADEROS</title>
 </head>
 <body>
-	<h1>User successfully registered!</h1>
+	<h1>LISTA DE PARQUEADEROS DE LA TABLA 'lugar_parqueadero' sis hetero patriarcal</h1>
 </body>
 </html>
