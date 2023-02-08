@@ -4,4 +4,8 @@
 
 <web-app>
 	<display-name>Archetype Created Web Application</display-name>
+	<welcome-file-list>
+<!-- 	cambiar este archivo 'ingresoParqueadero.jsp' por el de 'login.jsp' -->
+		<welcome-file>ingresoParqueaderos.jsp</welcome-file> 
+	</welcome-file-list>
 </web-app>
