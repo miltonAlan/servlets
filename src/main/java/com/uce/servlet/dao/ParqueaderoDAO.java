@@ -2,13 +2,17 @@ package com.uce.servlet.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.uce.servlet.modelo.Parqueadero;
 
 public class ParqueaderoDAO extends Conecsion {
 	private Connection con = null;
 
-	public int registerEmployee(Parqueadero parqueadero) throws SQLException   {
+	public int registroParqueadero(Parqueadero parqueadero) throws SQLException {
 		String insert_parqueadero = "insert into lugar_parqueadero"
 				+ "(nombre_usuario, tipo_vehiculo, tiempo, placa, color, marca, descripcion_adicional)"
 				+ "values (?,?,?,?,?,?,?)";
@@ -17,7 +21,7 @@ public class ParqueaderoDAO extends Conecsion {
 
 		try {
 			con = getConecsion();
-			
+
 			PreparedStatement preparedStatement = con.prepareStatement(insert_parqueadero);
 			preparedStatement.setString(1, parqueadero.getNombre_usuario());
 			preparedStatement.setString(2, parqueadero.getTipo_vehiculo());
@@ -31,9 +35,6 @@ public class ParqueaderoDAO extends Conecsion {
 			result = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			this.printSQLException(e);
-		}
-		finally {
-			con.close();
 		}
 		return result;
 	}
@@ -52,5 +53,30 @@ public class ParqueaderoDAO extends Conecsion {
 				}
 			}
 		}
+	}
+
+	public List<Parqueadero> consultaParqueaderos() {
+		Parqueadero p = null;
+		String sql = "select * from lugar_parqueadero";
+		List<Parqueadero> listaParqueaderos = new ArrayList<>();
+		con = getConecsion();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				p = new Parqueadero();
+				p.setNombre_usuario(rs.getString("nombre_usuario"));
+				p.setTipo_vehiculo(rs.getString("tipo_vehiculo"));
+				p.setTiempo(rs.getString("tiempo"));
+
+				listaParqueaderos.add(p);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listaParqueaderos;
 	}
 }
