@@ -9,7 +9,7 @@
 <body>
 	<div align="center">
 		<h1>Registro Parqueadero</h1>
-		<form action="<%=request.getContextPath()%>/EmployeeServletUsed"
+		<form action="<%=request.getContextPath()%>/ParqueaderoNameServlet"
 			method="post" onsubmit="return validateForm()">
 			<table style="with: 80%">
 				<tr>
@@ -42,6 +42,16 @@
 				</tr>
 			</table>
 			<input type="submit" value="Registrar Parqueadero" />
+
+		</form>
+		<form action="<%=request.getContextPath()%>/ParqueaderoNameServlet"
+			method="get">
+			<input type="submit" value="Listar Parqueaderos Registrados" />
+			<table>
+				<tr>
+					<td><%=(request.getAttribute("msg") == null) ? " " : request.getAttribute("msg")%></td>
+				</tr>
+			</table>
 		</form>
 	</div>
 </body>
